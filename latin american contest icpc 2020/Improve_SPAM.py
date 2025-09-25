@@ -1,40 +1,50 @@
-#ddv: []
+MOD = 10**9 + 7
 
-def recorrer(num_ml):
-    global ddv
-    
-    lista_ml=dic_entrada[num_ml]
-    #lista_ml=[4, 5]
-    for z in range(len(lista_ml)):
-        if lista_ml[z] <= L and lista_ml[z] not in ddv: #es un mailing list
-            ddv.append(lista_ml[z])
-            recorrer(lista_ml[z])
-    
-        elif lista_ml[z] > L: #es un mail directo
-            if lista_ml[z] in dic_salida:
-                dic_salida[lista_ml[z]]+=1
-            else:
-                dic_salida[lista_ml[z]]=1
-    
-    del lista_ml[len(lista_ml)-1]
+def contar_total(num_ml):
+    #Cuenta todos los envíos con duplicados (B)
+    if num_ml in memo_total:
+        return memo_total[num_ml]
 
-N, L= map(int,input().split())
-dic_entrada={}
-dic_salida={}
-ddv=[]
+    total = 0
+    for destino in dic_entrada[num_ml]:
+        if destino <= L:  # mailing list
+            total += contar_total(destino)
+        else:  # mail directo
+            total += 1
 
-for i in range(1,L+1):
-    l=list(map(int,input().split()))
-    dic_entrada[i]=[]
-    for j in range(l[0]):        
-        dic_entrada[i].append(l[j+1])
+    memo_total[num_ml] = total
+    return total
 
-finished=False
 
-ddv.append(1)
-recorrer(1)
+def marcar_unicos(num_ml):
+    #Marca mails únicos en visited (para A)
+    for destino in dic_entrada[num_ml]:
+        if destino <= L:  # mailing list
+            if destino not in visited_ml:
+                visited_ml.add(destino)
+                marcar_unicos(destino)
+        else:  # mail directo
+            visited_mails.add(destino)
 
-r1=sum(dic_salida.values())
-r2=len(dic_salida)
 
-print(r1, r2)
+# Input
+N, L = map(int, input().split())
+dic_entrada = {}
+
+for i in range(1, L + 1):
+    datos = list(map(int, input().split()))
+    dic_entrada[i] = datos[1:]
+
+memo_total = {}
+visited_ml = set()
+visited_mails = set()
+
+# Calcular B (con duplicados)
+B = contar_total(1) % MOD
+
+# Calcular A (sin duplicados)
+visited_ml.add(1)
+marcar_unicos(1)
+A = len(visited_mails) % MOD
+
+print(B, A)
