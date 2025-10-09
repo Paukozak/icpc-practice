@@ -3,14 +3,13 @@ T = list(map(int, input().split()))
 cantbarcos = 0
 resta = N
 i = 1
-bandera = True
-while bandera:
-    if resta-i >= 0:
-        cantbarcos+=1
-        resta-= i
-        i+= 1
-    else:
-        bandera = False
+cantbarcos=0
+cont=0
+
+while resta>0:
+    cantbarcos+=1
+    resta-=cantbarcos
+    
 
 gananciatotal = 0
 
@@ -24,21 +23,34 @@ def calcular_costo(inicio, fin):
     return costo
 
 for i in range(1, cantbarcos + 1):  # para cada cantidad de barcos
+    cont+=i
     for j in range(1, N + 1):  # para cada posición
         # Opción 1: no colocar barco en la posición j
-        tabla[i][j] = tabla[i][j-1]
         
+        if j>1:
+            tabla[i][j] = tabla[i][j-1]
+        else:
+            tabla[i][j]=tabla[i-1][N]
+
+        #print("1) en la fila ",i," columna ",j," puse ",tabla[i][j])
+  
         # Opción 2: colocar el i-ésimo barco terminando en la posición j
         # El barco i tiene longitud i
-        if j >= i:  # si hay suficiente espacio
+        if j >= cont:  # si hay suficiente espacio
             costo_excavacion = calcular_costo(j-i, j)  # costo de excavar desde j-i hasta j
             ganancia_neta = G - costo_excavacion
             
-            if ganancia_neta >= 0:  # cambié > por >= para incluir ganancias de 0
+            #print("hay espacio")
+            #print("ganancia: ", ganancia_neta)
+
+            if ganancia_neta > 0:  # cambié > por >= para incluir ganancias de 0
                 if i == 1:
                     tabla[i][j] = max(tabla[i][j], ganancia_neta)
                 else:
                     tabla[i][j] = max(tabla[i][j], tabla[i-1][j-i] + ganancia_neta)
+                
 
-# La respuesta está en tabla[cantbarcos][N]
-print(tabla)
+            #print("cambie el valor por: ",tabla[i][j])
+
+# La respuesta está en taaaaklkjkjrcos][N]
+print(tabla[cantbarcos][N])
