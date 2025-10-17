@@ -38,32 +38,6 @@ for i in range(1, cantbarcos+1):  # para cada cantidad de barcos
             else: 
                 tabla[i][j]= tabla[i][j-1]
 
-
-
-
-            
-
-
-
-        #print("1) en la fila ",i," columna ",j," puse ",tabla[i][j])
-  
-        # Opción 2: colocar el i-ésimo barco terminando en la posición j
-        # El barco i tiene longitud i
-          # si hay suficiente espacio
-            
-            
-            #print("hay espacio")
-            #print("ganancia: ", ganancia_neta)
-
-            #if ganancia_neta > 0:  # cambié > por >= para incluir ganancias de 0
-             #   if i == 1:
-              #      tabla[i][j] = max(tabla[i][j], ganancia_neta)
-               # else:
-                #    tabla[i][j] = max(tabla[i][j], tabla[i-1][j-i] + ganancia_neta)
-                
-
-            #print("cambie el valor por: ",tabla[i][j])
-
-# La respuesta está en taaaaklkjkjrcos][N]
-#print(tabla)
 print(tabla[cantbarcos][N])
+
+print (tabla)
