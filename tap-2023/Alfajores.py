@@ -1,22 +1,32 @@
+import sys
+input = sys.stdin.readline
+
+# Leer entrada
 N, M = map(int, input().split())
 A = list(map(int, input().split()))
 E = list(map(int, input().split()))
-final=[]
-dic={}
- 
-for i in range(N):
-    
-    if (A[i]) in dic:
-        final.append(dic[A[i]])
-    else:
-        inicio=A[i]
-        for j in range(M):
-            
-            if (E[j]<=A[i]):
-                div=A[i]//E[j]
-                A[i]=A[i]-(E[j]*div)
-                            
-        final.append(A[i])
-        dic[inicio]=A[i]
- 
-print(" ".join(map(str, final)))
+
+# Filtrar solo los mínimos estrictos (prefijos que realmente reducen)
+S = []
+min_so_far = float('inf')
+for e in E:
+    if e < min_so_far:
+        S.append(e)
+        min_so_far = e
+
+# Resolver para cada viaje
+ans = []
+cache = {}
+
+for a in A:
+    if a in cache:
+        ans.append(cache[a])
+        continue
+    r = a
+    for e in S:
+        r %= e
+    cache[a] = r
+    ans.append(r)
+
+# Imprimir resultado
+print(" ".join(map(str, ans)))
