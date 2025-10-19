@@ -53,7 +53,7 @@ for i in range(1, cantbarcos + 1):  # para cada cantidad de barcos
         # Opción 2: colocar el i-ésimo barco terminando en la posición j
         # El barco i tiene longitud i
         if j >= cont:  # si hay suficiente espacio
-            costo_excavacion = calcular_costo(j-i, j)  # costo de excavar desde j-i hasta j
+            costo_excavacion = calcular(j-i, j)  # costo de excavar desde j-i hasta j
             ganancia_neta = G - costo_excavacion
             
             #print("hay espacio")
