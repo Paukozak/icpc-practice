@@ -5,13 +5,21 @@ salida = []
 calculados = {}
 
 for alfajores in A:
-    alfajoresactuales = alfajores
     if alfajores in calculados:
         salida.append(calculados[alfajores])
         continue
+    alfajoresactuales = alfajores
     for x in E:
-        alfajoresactuales = alfajoresactuales % x
-        calculados[alfajores] = alfajoresactuales
+        if alfajoresactuales < x:
+            continue
+        if x == 1:
+            alfajoresactuales = 0
+            break
+        else:
+            alfajoresactuales %= x
+        if alfajoresactuales == 0:
+            break
+    calculados[alfajores] = alfajoresactuales
     salida.append(alfajoresactuales)    
 
 print(" ".join(map(str, salida)))
