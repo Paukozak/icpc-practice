@@ -41,11 +41,9 @@ for i in range(1, cantbarcos+1):  # para cada cantidad de barcos
             if ganancia_neta>0:
                 if i == 1:
                     tabla[i][j]=max(tabla[i][j-1], ganancia_neta) 
-                elif tabla[i][j]<(tabla[i-1][j-i] + ganancia_neta):
-                    tabla[i][j]=max(tabla[i-1][j-i] + ganancia_neta,tabla[i][j-1])
+                else:
+                    tabla[i][j]=max(tabla[i-1][j-i] + ganancia_neta,tabla[i][j-1],tabla[i-1][j])
             else: 
                 tabla[i][j]= max(tabla[i][j-1],tabla[i-1][j])
 
 print(tabla[cantbarcos][N])
-
-print (tabla)
