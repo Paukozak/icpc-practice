@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C++ Competitivo (UCRT64)",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-g",
+                "-O2",
+                "-Wall",
+                "-Wextra",
+                "-Wshadow",
+                "-std=gnu++23",
+                "-static",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compilador g++ con optimización O2 y flags de competencia."
+        }
+    ]
+}
