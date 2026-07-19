@@ -13,15 +13,15 @@ int main() {
 
     getline(cin, s);
     
-    std::unordered_set<char> sSet(s.begin(), s.end());
+    unordered_set<char> sSet;
 
-    if (sSet.size()<3) {
-        cout<<0;
-    } else if (sSet.size()<4) {
-        cout<<1;
-    } else {
-        cout<<(sSet.size()-4);
+    for (char c : s) {
+        if (c >= 'a' && c <= 'z') {
+            sSet.insert(c);
+        }
     }
+    
+    cout << sSet.size();
 
     return 0;
 }
