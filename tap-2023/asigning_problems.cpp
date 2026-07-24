@@ -10,45 +10,35 @@ int main () {
     long long k;
     cin>>k;
     vector<long long> problemas_nivel(k);
+    vector <long long> pref_sum_niveles(k);
     for (int i=0;i<k;i++) {
         cin>>problemas_nivel[i];
+        if(i!=0){
+            pref_sum_niveles[i]=pref_sum_niveles[i-1]+problemas_nivel[i];    
+        } else {
+            pref_sum_niveles[i]=problemas_nivel[i];
+        }
     }
     vector <long long> problemas(k);
-    vector <long long> pref_sum(k);
+    vector <long long> pref_sum_problemas(k);
     for (int i=0;i<k;i++){
         cin>>problemas[i];
         if(i!=0){
-            pref_sum[i]=pref_sum[i-1]+problemas[i];    
+            pref_sum_problemas[i]=pref_sum_problemas[i-1]+problemas[i];    
         } else {
-            pref_sum[i]=problemas[i];
+            pref_sum_problemas[i]=problemas[i];
         }
     }
-    long long cont,total;
-    total=0;
-    cont=0;
-    for (int i=0;i<k;i++){
-        
-        if (problemas[i]>problemas_nivel[i]){
-            problemas[i]-=problemas_nivel[i];
-            cont+=1;
-        } else{
-            for (int j=1;j<(i+1);j++){
-                if ((i-j)>=0 and problemas[i-j]>problemas_nivel[i]){
-                    problemas[i-j]-=problemas_nivel[i];
-                    cont+=1;
-                } else if ((i-j)<0){
-                    break;
-                }
-            }
+    long long cont;
+
+    cont=10000000000;
+    for (int i=0; i<k; i++){
+        if ((pref_sum_problemas[i]/pref_sum_niveles[i])<cont){
+            cont=pref_sum_problemas[i]/pref_sum_niveles[i];
         }
-        if (cont==k){
-            total+=1;
-            cont=0;}
     }
 
-    cout<<total;
-
-
+    cout<<cont;
 
     return 0;
 }
