@@ -30,7 +30,7 @@ int main () {
     
     tiempo_total=0;
     while (not tamaño_prio.empty() || not tamaño_unprio.empty()){
-        tiempo_min=513;
+        tiempo_min=20000000;
         if (tamaño_prio.empty()){
             velocidad_unprio=velocidad;
         } else if (tamaño_unprio.empty()){
@@ -64,7 +64,7 @@ int main () {
             } else if (tiempo==tiempo_min){
                 pos_unprio.push_back(j);
             }
-            //cout <<tamaño_unprio[j];
+            
             //cout << "calculo el tiempo menor de los no priorizadas"<<"\n";
         }
 
@@ -76,27 +76,32 @@ int main () {
         
         for (size_t j=0; j<tamaño_unprio.size();j++){
             tamaño_unprio[j]=tamaño_unprio[j]- (tiempo_min*(velocidad_unprio/tamaño_unprio.size()));
+            //cout <<tamaño_unprio[j]<< "\n";
             //cout <<"recalculo una no priorizada"<<"\n";
         }
 
         if (prio && unprio){
             for (size_t j=0; j<pos_prio.size();j++){
-                tamaño_prio.erase(tamaño_prio.begin()+pos_prio[j]);
+                tamaño_prio.erase(tamaño_prio.begin()+pos_prio[j]-j);
+                //cout <<"borro una priorizada"<<"\n";
             }
             for (size_t j=0; j<pos_unprio.size();j++){
-                tamaño_unprio.erase(tamaño_unprio.begin()+pos_unprio[j]);
+                tamaño_unprio.erase(tamaño_unprio.begin()+pos_unprio[j]-j);
+                //cout<<"borro una no priorizada"<<"\n";
             }
         }
         else if (unprio) {
             for (size_t j=0; j<pos_unprio.size();j++){
-                tamaño_unprio.erase(tamaño_unprio.begin()+pos_unprio[j]);
+                tamaño_unprio.erase(tamaño_unprio.begin()+pos_unprio[j]-j);
+                //cout<<"borro una no priorizada"<<"\n";
             }
-            //cout<<"borro una no priorizada"<<"\n";
+            
         } else {
             for (size_t j=0; j<pos_prio.size();j++){
-                tamaño_prio.erase(tamaño_prio.begin()+pos_prio[j]);
+                tamaño_prio.erase(tamaño_prio.begin()+pos_prio[j]-j);
+                //cout <<"borro una priorizada"<<"\n";
             }
-            //cout <<"borro una priorizada"<<"\n";
+           
         }
 
         pos_prio.clear();
@@ -110,7 +115,7 @@ int main () {
 
     }
 
-    cout<<tiempo_total;
+    cout<<fixed << setprecision(5) << tiempo_total;
 
     return 0;
 }
