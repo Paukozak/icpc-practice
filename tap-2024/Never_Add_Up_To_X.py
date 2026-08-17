@@ -1,43 +1,48 @@
 n, x = map(int, input().split())
 b = list(map(int, input().split()))
 
-b.sort(reverse=True)  # Ordenamos de mayor a menor
+b.sort()  # Ordenamos de menor a mayor
+#primero ordeno
+#creo diccionario para saber cuantos valores hacia adelante cambiar (ya que voy a ver de izq a derecha)
+#y mando
+perm={}
 
-res = []
-count = {}
-
-# Contamos la cantidad de cada belleza
-for val in b:
-    count[val] = count.get(val, 0) + 1
-
-# Lista de resultados
-res = []
-
-# Ordenamos de menor a mayor
-b.sort()
-
-i = 0
-j = n - 1
-ok = True
-res = []
-
-while i <= j:
-    # Elegimos el más grande disponible
-    if not res:
-        res.append(b[j])
-        j -= 1
+for beauty in b:
+    if beauty not in perm: 
+        perm[beauty]=1
     else:
-        if res[-1] + b[i] != x:
-            res.append(b[i])
-            i += 1
-        elif res[-1] + b[j] != x:
-            res.append(b[j])
-            j -= 1
-        else:
-            ok = False
-            break
+        perm[beauty]+=1
 
-if ok:
-    print(*res)
+if n==2:
+    if (b[0]+b[1])==x:
+        print ('*')
+    else:
+        print (" ".join(map(str, b)))
 else:
-    print("*")
+    for i in range(len(b)-1):
+        aux=b[i]+b[i+1]
+        if aux==x:
+            if (i-(perm[b[i]]))>=0:
+                aux=b[i]
+                temp=b[i]
+                b[i]=b[i-perm[b[i]]]
+                b[i-perm[temp]]=aux
+                print (" ".join(map(str, b)))
+                break
+            elif (i+1+perm[b[i+1]])<=(len(b)-1):
+                aux=b[i+1]
+                temp=b[i+1]
+                b[i+1]=b[i+1+perm[b[i+1]]]
+                b[i+1+perm[temp]]=aux
+                print (" ".join(map(str, b)))
+                break
+            else:
+                print('*')
+                break
+        elif i==(len(b)-2):
+            print (" ".join(map(str, b)))
+
+
+
+
+
