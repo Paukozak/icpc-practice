@@ -20,7 +20,6 @@ for i in range (t):
                 while arr[i]<arr[i-j] and ((i-j)>=0):
                     acum=cost[i-j]+acum 
                     j+=1
-                print(acum)
                 if acum>=cost[i]:
                     matriz[i]=matriz[i-j]+cost[i]
                     arr[i-1]=arr[i]
