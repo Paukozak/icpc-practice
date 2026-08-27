@@ -6,7 +6,7 @@
 using namespace std;
 
 typedef long long ll;
-
+0
 vector<int> padre;
 
 void inicializar(int n) {
