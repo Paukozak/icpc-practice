@@ -10,20 +10,19 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n, k, cantAr, r, x;
+    ll n, k, r, x;
 
     cin>>n;
     cin>>k;
 
-    vector<int> v(n-k+1); 
+    vector<ll> v(n-k+1); 
 
-    for (int i=0; i<(n-k+1); i++) {
+    for (ll i=0; i<(n-k+1); i++) {
         cin>>v[i];
     }
 
-    cantAr=(n+k-1)/k; //division redondeada para arriba 
 
-    for (int i=0; i<cantAr; i++) {
+    for (ll i=0; i<v.size(); i++) {
 
        //obtener todas las combinaciones de k numeros que sumados den igual a v[x] 
         

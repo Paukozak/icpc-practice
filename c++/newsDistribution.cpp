@@ -1,18 +1,19 @@
 // https://codeforces.com/problemset/problem/1167/C
 
-//no funciona porque se pasa del tiempo :(
-
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
-
+0
 vector<int> padre;
+vector<int> tamanio;
 
 void inicializar(int n) {
 	padre.resize(n); //el vector padre tiene n elementos
+    tamanio.resize(n); 
 	for (int i = 0; i < n; i++) {
  		padre[i] = i; // al principio, cada uno es padre de sí mismo
+        tamanio[i] = 1;
  	}
 }
 
@@ -26,6 +27,7 @@ void unir(int a, int b) {
 	b = encontrar(b);
 	if (a != b) {
 	padre[a] = b; // el grupo de a pasa a depender del grupo de b
+    tamanio[b] += tamanio[a];
  	}
 }
 
@@ -33,7 +35,7 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n, m, x, ac, ant, cont;
+    int n, m, x, ac, ant;
     string grupo;
 
     cin>>n>>m;
@@ -41,6 +43,7 @@ int main() {
     inicializar(n+1);
 
     vector<int> result(n);
+     
 
     for (int i=0; i<m; i++) {
 
@@ -60,24 +63,9 @@ int main() {
 
     }
 
-    for (int i=0; i<n+1; i++) {
-        cont=1;
-
-        for (int j=0; j<n+1; j++) {
-            if (j!=i) {
-                if (encontrar(i)==encontrar(j)) {
-                    cont+=1;
-                }
-            }
-        }
-
-        result[i]=cont;
-    }
-
-
     
-    for (int i=1; i<=n; i++) {
-        cout << result[i] << " ";
+    for (int i = 1; i <= n; i++) {
+        cout << tamanio[encontrar(i)] << " ";
     }
 
 
