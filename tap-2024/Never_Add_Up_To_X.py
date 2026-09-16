@@ -21,7 +21,7 @@ if n==2:
 else:
     for i in range(len(b)-1):
         aux=b[i]+b[i+1]
-        if aux==x:
+        if aux==x:            
             if (i-(perm[b[i]]))>=0:
                 aux=b[i]
                 temp=b[i]

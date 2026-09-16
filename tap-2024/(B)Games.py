@@ -25,10 +25,7 @@ for num in n:
         pref_p2.append(pref_p2[-1])
         pref_imp.append(pref_imp[-1])
         pref_unos.append(pref_unos[-1])
-
-#print (pref_unos)
-#print(pref_p2)
-#print(pref_imp)    
+  
 
 for i in range(cant_partidas):
     rango=list(map(int, input().split()))
@@ -40,16 +37,7 @@ for i in range(cant_partidas):
     p2=[]
     imp=[]
     unos=[]
-    
-    #print(sublista)
-    
-    #unos=sublista.count(1)
-    #if unos % 2 == 1:
-    #    a+=1
-        
-     
-    #print("Puntos a: ",(pref_p2[fin]-pref_p2[inicio])+a)
-    #print("Puntos b: ",pref_imp[fin]-pref_imp[inicio])
+
     if (pref_unos[fin]-pref_unos[inicio])%2==1:
         a+=1
 
@@ -59,28 +47,5 @@ for i in range(cant_partidas):
         result.append("A")
     else:
         result.append("E")
-    # for num in sublista:
-    #     if num==1:
-    #         unos.append(1)
-    #     elif num % 2 == 1:
-    #         imp.append(num)
-    #     elif es_potencia_de_2(num) == True:
-    #         p2.append(num)
-            
-    # a=sum(p2)
-    # b=sum(imp)
-    
-    # if len(unos) % 2 == 1:
-    #     a+=1
-    
-    # if a>b:
-    #     result.append("A")
-    #     #print("A")
-    # elif b>a:
-    #     result.append("B")
-    #     #print("B")
-    # else:
-    #     result.append("E")
-    #     #print("E")
         
 print(" ".join(map(str, result))) 
